@@ -6,8 +6,8 @@ class CarDealer(models.Model):
     id = models.CharField(primary_key=True, max_length=32)
     name = models.CharField(unique=True, max_length=50, blank=True, null=True)
     address = models.TextField(blank=True, null=True)
-    province = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True)
-    city = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True)
+    province = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True,related_name='cardealer_province')
+    city = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True,related_name='cardealer_city')
     phone_num = models.CharField(max_length=100, blank=True, null=True)
     visitor_num = models.IntegerField(blank=True, null=True)
     call_phone_num = models.IntegerField(blank=True, null=True)
@@ -33,7 +33,7 @@ class City(models.Model):
 
 class Province(models.Model):
     name = models.CharField(unique=True, max_length=50, blank=True, null=True)
-    region = models.ForeignKey('Region', models.DO_NOTHING, blank=True, null=True)
+    region = models.ForeignKey('Region', models.DO_NOTHING, blank=True, null=True,related_name='province_region')
 
     class Meta:
         managed = False
@@ -46,3 +46,10 @@ class ManufacturerName(models.Model):
     class Meta:
         managed = False
         db_table = 'manufacturer_name'
+
+class Region(models.Model):
+    name = models.CharField(unique=True, max_length=50, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'region'

@@ -3,7 +3,7 @@ from . import models
 
 
 class ActivitySerializers(serializers.ModelSerializer):
-    activity_plan=serializers.CharField(source='activity_plan.activity_name')
+    activity_plan_name=serializers.CharField(source='activity_plan.activity_name')
     class Meta:
         # 关联数据表
         model = models.Activity
