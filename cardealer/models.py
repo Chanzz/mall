@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class CarDealer(models.Model):
     id = models.CharField(primary_key=True, max_length=32)
@@ -19,3 +20,29 @@ class CarDealer(models.Model):
     class Meta:
         managed = False
         db_table = 'car_dealer'
+
+
+class City(models.Model):
+    province = models.ForeignKey('Province', models.DO_NOTHING, blank=True, null=True)
+    name = models.CharField(unique=True, max_length=50, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'city'
+
+
+class Province(models.Model):
+    name = models.CharField(unique=True, max_length=50, blank=True, null=True)
+    region = models.ForeignKey('Region', models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'province'
+
+
+class ManufacturerName(models.Model):
+    name = models.CharField(unique=True, max_length=50, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'manufacturer_name'
