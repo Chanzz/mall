@@ -12,3 +12,33 @@ class CardealerView(generics.ListCreateAPIView):
 class CardealerDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.CarDealer.objects.all()
     serializer_class = serializers.CardealerSerializers
+
+
+class CityView(generics.ListCreateAPIView):
+    queryset = models.City.objects.all()
+    serializer_class = serializers.CitySerializers
+
+
+class CityDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.City.objects.all()
+    serializer_class = serializers.CitySerializers
+
+
+class ManufacturerNameView(generics.ListCreateAPIView):
+    queryset = models.ManufacturerName.objects.all()
+    serializer_class = serializers.ManufacturerNameSerializers
+
+
+class ManufacturerNameDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.ManufacturerName.objects.all()
+    serializer_class = serializers.ManufacturerNameSerializers
+
+
+class ProvinceView(generics.ListCreateAPIView):
+    queryset = models.Province.objects.all()
+    serializer_class = serializers.ProvinceSerializers
+
+
+class ProvinceDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Province.objects.all()
+    serializer_class = serializers.ProvinceSerializers

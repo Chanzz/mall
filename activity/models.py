@@ -10,7 +10,8 @@ from django.db import models
 
 class Activity(models.Model):
     number_of_college = models.IntegerField(blank=True, null=True)
-    activity_plan = models.ForeignKey('ActivityPlan', models.DO_NOTHING, blank=True, null=True,related_name='ActivityPlan')
+    activity_plan = models.ForeignKey('ActivityPlan', models.DO_NOTHING, blank=True, null=True,
+                                      related_name='activity_plan_name')
     content = models.TextField(blank=True, null=True)
     car = models.ForeignKey('MallCar', models.DO_NOTHING, blank=True, null=True)
     start_date = models.DateTimeField(blank=True, null=True)
@@ -30,7 +31,8 @@ class Activity(models.Model):
     class Meta:
         managed = False
         db_table = 'activity'
-
+    def __str__(self):
+        return self.name
 
 class ActivityImage(models.Model):
     activity = models.ForeignKey(Activity, models.DO_NOTHING, blank=True, null=True)
@@ -72,6 +74,9 @@ class ActivityPlan(models.Model):
         managed = False
         db_table = 'activity_plan'
 
+    def __str__(self):
+        return str(self.activity_name)
+
 
 class ActivitySummary(models.Model):
     activity = models.ForeignKey(Activity, models.DO_NOTHING)
@@ -101,13 +106,16 @@ class MallCar(models.Model):
         managed = False
         db_table = 'mall_car'
 
+    def __str__(self):
+        return self.name
+
 
 class CarDealer(models.Model):
     id = models.CharField(primary_key=True, max_length=32)
     name = models.CharField(unique=True, max_length=50, blank=True, null=True)
     address = models.TextField(blank=True, null=True)
-    province = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True,related_name='cardealer_province')
-    city = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True,related_name='cardealer_city')
+    province = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True, related_name='cardealer_province')
+    city = models.ForeignKey('City', models.DO_NOTHING, blank=True, null=True, related_name='cardealer_city')
     phone_num = models.CharField(max_length=100, blank=True, null=True)
     visitor_num = models.IntegerField(blank=True, null=True)
     call_phone_num = models.IntegerField(blank=True, null=True)
