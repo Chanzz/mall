@@ -12,10 +12,10 @@ class Activity(models.Model):
     number_of_college = models.IntegerField(blank=True, null=True)
     activity_plan = models.ForeignKey('ActivityPlan', models.DO_NOTHING, blank=True, null=True,
                                       related_name='activity_plan_name')
-    content = models.TextField(blank=True, null=True)
+    content = models.TextField('活动内容', blank=True, null=True)
     car = models.ForeignKey('MallCar', models.DO_NOTHING, blank=True, null=True)
-    start_date = models.DateTimeField(blank=True, null=True)
-    end_date = models.DateTimeField(blank=True, null=True)
+    start_date = models.DateTimeField('开始时间', blank=True, null=True)
+    end_date = models.DateTimeField('结束时间', blank=True, null=True)
     add_money_for_benifit = models.FloatField(blank=True, null=True)
     activity_discount = models.FloatField(blank=True, null=True)
     market_discount = models.FloatField(blank=True, null=True)
@@ -23,16 +23,18 @@ class Activity(models.Model):
     front_image = models.CharField(max_length=50, blank=True, null=True)
     pay_money = models.FloatField(blank=True, null=True)
     name = models.CharField(max_length=50, blank=True, null=True)
-    watch_num = models.IntegerField(blank=True, null=True)
+    watch_num = models.IntegerField('访问人数', blank=True, null=True)
     attent_num = models.IntegerField(blank=True, null=True)
-    activity_price = models.FloatField(blank=True, null=True)
-    market_price = models.FloatField(blank=True, null=True)
+    activity_price = models.FloatField('活动价格', blank=True, null=True)
+    market_price = models.FloatField('市场价格', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'activity'
+
     def __str__(self):
-        return self.name
+        return str(self.name)
+
 
 class ActivityImage(models.Model):
     activity = models.ForeignKey(Activity, models.DO_NOTHING, blank=True, null=True)
@@ -129,6 +131,9 @@ class CarDealer(models.Model):
         managed = False
         db_table = 'car_dealer'
 
+    def __str__(self):
+        return self.name
+
 
 class City(models.Model):
     province = models.ForeignKey('Province', models.DO_NOTHING, blank=True, null=True)
@@ -137,6 +142,9 @@ class City(models.Model):
     class Meta:
         managed = False
         db_table = 'city'
+
+    def __str__(self):
+        return self.name
 
 
 class District(models.Model):
@@ -147,6 +155,9 @@ class District(models.Model):
         managed = False
         db_table = 'district'
 
+    def __str__(self):
+        return self.name
+
 
 class ManufacturerName(models.Model):
     name = models.CharField(unique=True, max_length=50, blank=True, null=True)
@@ -154,6 +165,9 @@ class ManufacturerName(models.Model):
     class Meta:
         managed = False
         db_table = 'manufacturer_name'
+
+    def __str__(self):
+        return self.name
 
 
 class Province(models.Model):
@@ -164,6 +178,9 @@ class Province(models.Model):
         managed = False
         db_table = 'province'
 
+    def __str__(self):
+        return self.name
+
 
 class Region(models.Model):
     name = models.CharField(unique=True, max_length=50, blank=True, null=True)
@@ -171,3 +188,6 @@ class Region(models.Model):
     class Meta:
         managed = False
         db_table = 'region'
+
+    def __str__(self):
+        return self.name

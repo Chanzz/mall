@@ -15,6 +15,7 @@ class ActivityAdmin(admin.ModelAdmin):
     list_per_page = 10
     # prepopulated_fields = {}
     # inlines = [CarInline,]
+    # fieldsets = ()
 
 
 # list_select_related = ['activity_plan']

@@ -20,6 +20,9 @@ class CarDealer(models.Model):
     class Meta:
         managed = False
         db_table = 'car_dealer'
+    #返回值，使其不是object
+    def __str__(self):
+        return self.name
 
 
 class City(models.Model):
@@ -29,6 +32,8 @@ class City(models.Model):
     class Meta:
         managed = False
         db_table = 'city'
+    def __str__(self):
+        return self.name
 
 
 class Province(models.Model):
@@ -38,6 +43,8 @@ class Province(models.Model):
     class Meta:
         managed = False
         db_table = 'province'
+    def __str__(self):
+        return self.name
 
 
 class ManufacturerName(models.Model):
@@ -46,6 +53,8 @@ class ManufacturerName(models.Model):
     class Meta:
         managed = False
         db_table = 'manufacturer_name'
+    def __str__(self):
+        return self.name
 
 
 class Region(models.Model):
@@ -54,3 +63,5 @@ class Region(models.Model):
     class Meta:
         managed = False
         db_table = 'region'
+    def __str__(self):
+        return self.name
