@@ -37,12 +37,24 @@ class ActivitySerializers(serializers.ModelSerializer):
         # 验证器
         # validators=[]
 
-    def validated_context(self,value):
-        if self.context == '测试':
-        #     raise serializers.ValidationError('不能只是测试')
-        # if '测试'in value:
+    # def validated_context(self,value):
+    #     if self.context == '测试':
+    #     #     raise serializers.ValidationError('不能只是测试')
+    #     # if '测试'in value:
+    #         raise serializers.ValidationError('有敏感字')
+    #     return value
+    def validate(self, attrs):
+        '''
+        重写validate函数
+        校验反序列化的字段
+        '''
+        # if attrs['content']=='测试':
+        #     raise serializers.ValidationError('有敏感字')
+        # return attrs
+        if '测试' in attrs['content']:
             raise serializers.ValidationError('有敏感字')
-        return value
+        return attrs
+
 
 class ActivitySummarySerializers(serializers.ModelSerializer):
     class Meta:
