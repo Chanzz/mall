@@ -67,6 +67,9 @@ class ActivityDetailView(
     serializer_class = serializers.ActivitySerializers
     def get(self, request, *args, **kwargs):
         handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes=1024 * 1024, backupCount=5)
+        # fmt = '%(asctime)s - %(filename)s:%(lineno)s - %(name)s - %(message)s'
+        # formatter = logging.Formatter(fmt)
+        # handler.setFormatter(formatter)
         logger.addHandler(handler)
         logger.setLevel(logging.DEBUG)
         if 'HTTP_X_FORWARDED_FOR' in request.META:
