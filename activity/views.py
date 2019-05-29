@@ -68,11 +68,12 @@ class ActivityDetailView(
     def get(self, request, *args, **kwargs):
         handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes=1024 * 1024, backupCount=5)
         logger.addHandler(handler)
+        logger.setLevel(logging.DEBUG)
         if 'HTTP_X_FORWARDED_FOR' in request.META:
             ip = request.META['HTTP_X_FORWARDED_FOR']
         else:
             ip = request.META['REMOTE_ADDR']
-        logger.error('[Success] ' + ip + ' has accessed in! ')
+        logger.info('[Success] ' + ip + ' has accessed in! ')
         return self.retrieve(request, *args, **kwargs)
     # def get(self, request, *args, **kwargs):
     #     return self.retrieve(request, *args, **kwargs)
