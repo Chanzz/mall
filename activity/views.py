@@ -5,7 +5,12 @@ from rest_framework.response import Response
 from . import models
 from . import serializers
 from rest_framework import generics
+import logging
 
+import logging.handlers
+logger = logging.getLogger(__name__)
+
+LOG_FILE ='log/DEBUG_log'
 
 # Create your views here.
 
@@ -54,20 +59,21 @@ class ActivityView(
     queryset = models.Activity.objects.all()
     serializer_class = serializers.ActivitySerializers
 
-    # def get(self, request, *args, **kwargs):
-    #     return self.list(request, *args, **kwargs)
-    #
-    # def post(self, request, *args, **kwargs):
-    #     return self.create(request, *args, **kwargs)
-
 
 class ActivityDetailView(
     # mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin,generics.GenericAPIView
-    generics.RetrieveUpdateDestroyAPIView
-):
+    generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Activity.objects.all()
     serializer_class = serializers.ActivitySerializers
-
+    def get(self, request, *args, **kwargs):
+        handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes=1024 * 1024, backupCount=5)
+        logger.addHandler(handler)
+        if 'HTTP_X_FORWARDED_FOR' in request.META:
+            ip = request.META['HTTP_X_FORWARDED_FOR']
+        else:
+            ip = request.META['REMOTE_ADDR']
+        logger.error('[Success] ' + ip + ' has accessed in! ')
+        return self.retrieve(request, *args, **kwargs)
     # def get(self, request, *args, **kwargs):
     #     return self.retrieve(request, *args, **kwargs)
     #

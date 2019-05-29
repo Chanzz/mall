@@ -10,8 +10,11 @@ from . import models
 
 # admin.site.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
+    # 主页显示字段
     list_display = ('content', 'start_date')
+    # 排序
     # ordering = ('-start_date')
+    # 主页每页显示条数
     list_per_page = 10
     # prepopulated_fields = {}
     # inlines = [CarInline,]
